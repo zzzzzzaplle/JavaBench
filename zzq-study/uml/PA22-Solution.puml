@@ -1,0 +1,153 @@
+@startuml
+abstract class assignment.actions.Action
+abstract class assignment.actions.ActionResult
+abstract class assignment.actions.Move
+abstract class assignment.entities.Entity
+abstract class assignment.game.AbstractSokobanGame
+annotation java.lang.Override
+annotation java.lang.SuppressWarnings
+annotation org.jetbrains.annotations.NotNull
+annotation org.jetbrains.annotations.Nullable
+annotation org.jetbrains.annotations.Unmodifiable
+class assignment.Sokoban
+class assignment.SokobanGameFactory
+class assignment.actions.Exit
+class assignment.actions.InvalidInput
+class assignment.actions.Undo
+class assignment.entities.Box
+class assignment.entities.Empty
+class assignment.entities.Player
+class assignment.entities.Wall
+class assignment.game.GameMap
+class assignment.game.GameState
+class assignment.game.Position
+class assignment.tui.TerminalInputEngine
+class assignment.tui.TerminalRenderingEngine
+class assignment.tui.TerminalSokobanGame
+class assignment.utils.NotImplementedException
+class assignment.utils.ShouldNotReachException
+class assignment.utils.StringResources
+class java.io.IOException
+class java.io.InputStream
+class java.io.PrintStream
+class java.lang.RuntimeException
+class java.net.URISyntaxException
+class java.net.URL
+class java.nio.file.Files
+class java.nio.file.Path
+class java.util.Objects
+class java.util.Scanner
+class java.util.concurrent.atomic.AtomicInteger
+class java.util.regex.Matcher
+class java.util.regex.Pattern
+class java.util.stream.Collectors
+interface assignment.game.InputEngine
+interface assignment.game.RenderingEngine
+interface assignment.game.SokobanGame
+assignment.actions.ActionResult ..> org.jetbrains.annotations.NotNull
+assignment.actions.Move --|> assignment.actions.Action
+assignment.actions.Move ..> java.lang.Override
+assignment.actions.Move ..> org.jetbrains.annotations.NotNull
+assignment.actions.Move ..> assignment.game.Position
+assignment.game.AbstractSokobanGame ..> assignment.actions.Action
+assignment.game.AbstractSokobanGame ..> assignment.actions.ActionResult
+assignment.game.AbstractSokobanGame ..> assignment.actions.Move
+assignment.game.AbstractSokobanGame ..> assignment.entities.Entity
+assignment.game.AbstractSokobanGame ..> org.jetbrains.annotations.NotNull
+assignment.game.AbstractSokobanGame ..> assignment.actions.Exit
+assignment.game.AbstractSokobanGame ..> assignment.actions.InvalidInput
+assignment.game.AbstractSokobanGame ..> assignment.actions.Undo
+assignment.game.AbstractSokobanGame ..> assignment.entities.Box
+assignment.game.AbstractSokobanGame ..> assignment.entities.Empty
+assignment.game.AbstractSokobanGame ..> assignment.entities.Player
+assignment.game.AbstractSokobanGame ..> assignment.entities.Wall
+assignment.game.AbstractSokobanGame ..> assignment.utils.ShouldNotReachException
+assignment.game.AbstractSokobanGame ..> assignment.utils.StringResources
+assignment.game.AbstractSokobanGame --|> assignment.game.SokobanGame
+assignment.Sokoban ..> org.jetbrains.annotations.NotNull
+assignment.Sokoban ..> java.io.IOException
+assignment.Sokoban ..> assignment.game.SokobanGame
+assignment.SokobanGameFactory ..> org.jetbrains.annotations.NotNull
+assignment.SokobanGameFactory ..> assignment.game.GameMap
+assignment.SokobanGameFactory ..> assignment.game.GameState
+assignment.SokobanGameFactory ..> assignment.tui.TerminalInputEngine
+assignment.SokobanGameFactory ..> assignment.tui.TerminalRenderingEngine
+assignment.SokobanGameFactory ..> assignment.tui.TerminalSokobanGame
+assignment.SokobanGameFactory ..> java.io.IOException
+assignment.SokobanGameFactory ..> java.net.URISyntaxException
+assignment.SokobanGameFactory ..> java.net.URL
+assignment.SokobanGameFactory ..> java.nio.file.Files
+assignment.SokobanGameFactory ..> java.nio.file.Path
+assignment.SokobanGameFactory ..> assignment.game.SokobanGame
+assignment.actions.Exit --|> assignment.actions.Action
+assignment.actions.InvalidInput --|> assignment.actions.Action
+assignment.actions.InvalidInput ..> org.jetbrains.annotations.NotNull
+assignment.actions.Undo --|> assignment.actions.Action
+assignment.entities.Box --|> assignment.entities.Entity
+assignment.entities.Empty --|> assignment.entities.Entity
+assignment.entities.Player --|> assignment.entities.Entity
+assignment.entities.Wall --|> assignment.entities.Entity
+assignment.game.GameMap ..> assignment.actions.Move
+assignment.game.GameMap ..> assignment.entities.Entity
+assignment.game.GameMap ..> org.jetbrains.annotations.NotNull
+assignment.game.GameMap ..> org.jetbrains.annotations.Nullable
+assignment.game.GameMap ..> org.jetbrains.annotations.Unmodifiable
+assignment.game.GameMap ..> assignment.entities.Box
+assignment.game.GameMap ..> assignment.entities.Empty
+assignment.game.GameMap ..> assignment.entities.Player
+assignment.game.GameMap ..> assignment.entities.Wall
+assignment.game.GameMap ..> java.util.concurrent.atomic.AtomicInteger
+assignment.game.GameMap ..> java.util.stream.Collectors
+assignment.game.GameState ..> assignment.actions.Move
+assignment.game.GameState ..> assignment.entities.Entity
+assignment.game.GameState ..> java.lang.Override
+assignment.game.GameState ..> org.jetbrains.annotations.NotNull
+assignment.game.GameState ..> org.jetbrains.annotations.Nullable
+assignment.game.GameState ..> org.jetbrains.annotations.Unmodifiable
+assignment.game.GameState ..> assignment.entities.Box
+assignment.game.GameState ..> assignment.entities.Empty
+assignment.game.GameState ..> assignment.entities.Player
+assignment.game.GameState ..> java.util.stream.Collectors
+assignment.game.Position ..> java.lang.Override
+assignment.game.Position ..> org.jetbrains.annotations.NotNull
+assignment.game.Position ..> java.util.Objects
+assignment.tui.TerminalInputEngine ..> assignment.actions.Action
+assignment.tui.TerminalInputEngine ..> assignment.actions.Move
+assignment.tui.TerminalInputEngine ..> java.lang.Override
+assignment.tui.TerminalInputEngine ..> org.jetbrains.annotations.NotNull
+assignment.tui.TerminalInputEngine ..> assignment.actions.Exit
+assignment.tui.TerminalInputEngine ..> assignment.actions.InvalidInput
+assignment.tui.TerminalInputEngine ..> assignment.actions.Undo
+assignment.tui.TerminalInputEngine ..> assignment.utils.ShouldNotReachException
+assignment.tui.TerminalInputEngine ..> assignment.utils.StringResources
+assignment.tui.TerminalInputEngine ..> java.io.InputStream
+assignment.tui.TerminalInputEngine ..> java.util.Scanner
+assignment.tui.TerminalInputEngine ..> java.util.regex.Matcher
+assignment.tui.TerminalInputEngine ..> java.util.regex.Pattern
+assignment.tui.TerminalInputEngine --|> assignment.game.InputEngine
+assignment.tui.TerminalRenderingEngine ..> assignment.entities.Entity
+assignment.tui.TerminalRenderingEngine ..> java.lang.Override
+assignment.tui.TerminalRenderingEngine ..> org.jetbrains.annotations.NotNull
+assignment.tui.TerminalRenderingEngine ..> assignment.entities.Box
+assignment.tui.TerminalRenderingEngine ..> assignment.entities.Empty
+assignment.tui.TerminalRenderingEngine ..> assignment.entities.Player
+assignment.tui.TerminalRenderingEngine ..> assignment.entities.Wall
+assignment.tui.TerminalRenderingEngine ..> assignment.game.GameState
+assignment.tui.TerminalRenderingEngine ..> assignment.game.Position
+assignment.tui.TerminalRenderingEngine ..> java.io.PrintStream
+assignment.tui.TerminalRenderingEngine --|> assignment.game.RenderingEngine
+assignment.tui.TerminalSokobanGame ..> assignment.actions.Action
+assignment.tui.TerminalSokobanGame ..> assignment.actions.ActionResult
+assignment.tui.TerminalSokobanGame --|> assignment.game.AbstractSokobanGame
+assignment.tui.TerminalSokobanGame ..> java.lang.Override
+assignment.tui.TerminalSokobanGame ..> assignment.game.GameState
+assignment.tui.TerminalSokobanGame ..> assignment.utils.StringResources
+assignment.tui.TerminalSokobanGame ..> assignment.game.InputEngine
+assignment.tui.TerminalSokobanGame ..> assignment.game.RenderingEngine
+assignment.utils.NotImplementedException --|> java.lang.RuntimeException
+assignment.utils.ShouldNotReachException --|> java.lang.RuntimeException
+assignment.utils.StringResources ..> java.lang.SuppressWarnings
+assignment.game.InputEngine ..> assignment.actions.Action
+assignment.game.InputEngine ..> org.jetbrains.annotations.NotNull
+assignment.game.RenderingEngine ..> org.jetbrains.annotations.NotNull
+@enduml

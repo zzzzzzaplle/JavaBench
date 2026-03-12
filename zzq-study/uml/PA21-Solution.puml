@@ -1,0 +1,134 @@
+@startuml
+abstract class pa1.model.Cell
+abstract class pa1.model.Entity
+abstract class pa1.model.MoveResult
+annotation java.lang.Override
+annotation org.jetbrains.annotations.NotNull
+annotation org.jetbrains.annotations.Nullable
+class java.io.BufferedReader
+class java.io.BufferedWriter
+class java.io.FileNotFoundException
+class java.io.IOException
+class java.io.InputStreamReader
+class java.nio.file.FileAlreadyExistsException
+class java.nio.file.Files
+class java.nio.file.Path
+class java.util.ArrayList
+class java.util.Collections
+class java.util.List
+class java.util.Locale
+class java.util.Objects
+class pa1.InertiaTextGame
+class pa1.Main
+class pa1.controller.GameBoardController
+class pa1.controller.GameController
+class pa1.model.EntityCell
+class pa1.model.ExtraLife
+class pa1.model.GameBoard
+class pa1.model.GameState
+class pa1.model.Gem
+class pa1.model.Mine
+class pa1.model.MoveStack
+class pa1.model.Player
+class pa1.model.Position
+class pa1.model.PositionOffset
+class pa1.model.StopCell
+class pa1.model.Wall
+class pa1.util.GameStateSerializer
+class pa1.view.GameBoardView
+class pa1.view.GameView
+enum pa1.model.Direction
+interface pa1.model.BoardElement
+pa1.model.Cell ..> org.jetbrains.annotations.NotNull
+pa1.model.Cell ..> java.util.Objects
+pa1.model.Cell --|> pa1.model.BoardElement
+pa1.model.Entity ..> org.jetbrains.annotations.Nullable
+pa1.model.Entity --|> pa1.model.BoardElement
+pa1.model.MoveResult ..> org.jetbrains.annotations.NotNull
+pa1.model.MoveResult ..> java.util.Collections
+pa1.model.MoveResult ..> java.util.List
+pa1.model.MoveResult ..> java.util.Objects
+pa1.InertiaTextGame ..> pa1.model.MoveResult
+pa1.InertiaTextGame ..> org.jetbrains.annotations.NotNull
+pa1.InertiaTextGame ..> org.jetbrains.annotations.Nullable
+pa1.InertiaTextGame ..> java.io.BufferedReader
+pa1.InertiaTextGame ..> java.io.IOException
+pa1.InertiaTextGame ..> java.io.InputStreamReader
+pa1.InertiaTextGame ..> java.util.Locale
+pa1.InertiaTextGame ..> java.util.Objects
+pa1.InertiaTextGame ..> pa1.controller.GameController
+pa1.InertiaTextGame ..> pa1.model.GameState
+pa1.InertiaTextGame ..> pa1.view.GameView
+pa1.InertiaTextGame ..> pa1.model.Direction
+pa1.Main ..> java.io.FileNotFoundException
+pa1.Main ..> java.nio.file.Path
+pa1.Main ..> pa1.model.GameState
+pa1.Main ..> pa1.util.GameStateSerializer
+pa1.controller.GameBoardController ..> org.jetbrains.annotations.NotNull
+pa1.controller.GameBoardController ..> org.jetbrains.annotations.Nullable
+pa1.controller.GameBoardController ..> java.util.ArrayList
+pa1.controller.GameBoardController ..> java.util.Objects
+pa1.controller.GameController ..> pa1.model.MoveResult
+pa1.controller.GameController ..> org.jetbrains.annotations.NotNull
+pa1.controller.GameController ..> java.util.Objects
+pa1.controller.GameController ..> pa1.model.GameState
+pa1.controller.GameController ..> pa1.model.Direction
+pa1.model.EntityCell --|> pa1.model.Cell
+pa1.model.EntityCell ..> java.lang.Override
+pa1.model.EntityCell ..> org.jetbrains.annotations.NotNull
+pa1.model.EntityCell ..> org.jetbrains.annotations.Nullable
+pa1.model.ExtraLife --|> pa1.model.Entity
+pa1.model.ExtraLife ..> java.lang.Override
+pa1.model.ExtraLife ..> org.jetbrains.annotations.NotNull
+pa1.model.GameBoard ..> org.jetbrains.annotations.NotNull
+pa1.model.GameBoard ..> org.jetbrains.annotations.Nullable
+pa1.model.GameBoard ..> java.util.ArrayList
+pa1.model.GameBoard ..> java.util.Collections
+pa1.model.GameBoard ..> java.util.List
+pa1.model.GameBoard ..> java.util.Objects
+pa1.model.GameState ..> org.jetbrains.annotations.NotNull
+pa1.model.GameState ..> java.util.Objects
+pa1.model.GameState ..> pa1.controller.GameBoardController
+pa1.model.GameState ..> pa1.view.GameBoardView
+pa1.model.Gem --|> pa1.model.Entity
+pa1.model.Gem ..> java.lang.Override
+pa1.model.Gem ..> org.jetbrains.annotations.NotNull
+pa1.model.Mine --|> pa1.model.Entity
+pa1.model.Mine ..> java.lang.Override
+pa1.model.Mine ..> org.jetbrains.annotations.NotNull
+pa1.model.MoveStack ..> org.jetbrains.annotations.NotNull
+pa1.model.MoveStack ..> java.util.ArrayList
+pa1.model.MoveStack ..> java.util.List
+pa1.model.MoveStack ..> java.util.Objects
+pa1.model.Player --|> pa1.model.Entity
+pa1.model.Player ..> java.lang.Override
+pa1.model.Player ..> org.jetbrains.annotations.NotNull
+pa1.model.Position ..> java.lang.Override
+pa1.model.Position ..> org.jetbrains.annotations.NotNull
+pa1.model.Position ..> org.jetbrains.annotations.Nullable
+pa1.model.Position ..> java.util.Objects
+pa1.model.PositionOffset ..> java.lang.Override
+pa1.model.StopCell ..> java.lang.Override
+pa1.model.StopCell ..> org.jetbrains.annotations.NotNull
+pa1.model.StopCell ..> org.jetbrains.annotations.Nullable
+pa1.model.StopCell --|> pa1.model.EntityCell
+pa1.model.Wall --|> pa1.model.Cell
+pa1.model.Wall ..> java.lang.Override
+pa1.model.Wall ..> org.jetbrains.annotations.NotNull
+pa1.util.GameStateSerializer ..> org.jetbrains.annotations.NotNull
+pa1.util.GameStateSerializer ..> java.io.BufferedReader
+pa1.util.GameStateSerializer ..> java.io.BufferedWriter
+pa1.util.GameStateSerializer ..> java.io.FileNotFoundException
+pa1.util.GameStateSerializer ..> java.io.IOException
+pa1.util.GameStateSerializer ..> java.nio.file.FileAlreadyExistsException
+pa1.util.GameStateSerializer ..> java.nio.file.Files
+pa1.util.GameStateSerializer ..> java.nio.file.Path
+pa1.util.GameStateSerializer ..> java.util.Objects
+pa1.view.GameBoardView ..> org.jetbrains.annotations.NotNull
+pa1.view.GameBoardView ..> java.util.Objects
+pa1.view.GameBoardView ..> pa1.model.GameBoard
+pa1.view.GameView ..> org.jetbrains.annotations.NotNull
+pa1.view.GameView ..> java.util.Objects
+pa1.view.GameView ..> pa1.model.GameState
+pa1.model.Direction ..> org.jetbrains.annotations.NotNull
+@enduml

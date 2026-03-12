@@ -1,0 +1,142 @@
+@startuml
+abstract class assignment.protocol.Game
+abstract class assignment.protocol.Piece
+abstract class assignment.protocol.Player
+annotation java.lang.Override
+annotation org.jetbrains.annotations.NotNull
+annotation org.jetbrains.annotations.Nullable
+class assignment.Game
+class assignment.JesonMor
+class assignment.Main
+class assignment.piece.Archer
+class assignment.piece.ArcherMoveRule
+class assignment.piece.FirstNMovesProtectionRule
+class assignment.piece.Knight
+class assignment.piece.KnightBlockRule
+class assignment.piece.KnightMoveRule
+class assignment.piece.NilMoveRule
+class assignment.piece.OccupiedRule
+class assignment.piece.OutOfBoundaryRule
+class assignment.piece.VacantRule
+class assignment.player.ConsolePlayer
+class assignment.player.RandomPlayer
+class assignment.protocol.Configuration
+class assignment.protocol.Move
+class assignment.protocol.MoveRecord
+class assignment.protocol.Place
+class assignment.protocol.exception.InvalidConfigurationError
+class java.lang.Error
+class java.util.ArrayList
+class java.util.Arrays
+class java.util.Objects
+class java.util.Random
+class java.util.Scanner
+class java.util.StringJoiner
+class java.util.stream.Collectors
+enum assignment.protocol.Color
+interface assignment.piece.Rule
+interface java.lang.Cloneable
+assignment.protocol.Game ..> java.lang.Override
+assignment.protocol.Game ..> org.jetbrains.annotations.NotNull
+assignment.protocol.Game ..> org.jetbrains.annotations.Nullable
+assignment.protocol.Game ..> java.util.stream.Collectors
+assignment.protocol.Game --|> java.lang.Cloneable
+assignment.protocol.Player ..> java.lang.Override
+assignment.protocol.Player ..> org.jetbrains.annotations.NotNull
+assignment.protocol.Player ..> java.util.Objects
+assignment.protocol.Player --|> java.lang.Cloneable
+assignment.JesonMor ..> java.lang.Override
+assignment.JesonMor ..> org.jetbrains.annotations.NotNull
+assignment.JesonMor --|> assignment.Game
+assignment.JesonMor ..> assignment.piece.Knight
+assignment.JesonMor ..> java.util.ArrayList
+assignment.JesonMor ..> java.util.Arrays
+assignment.Main ..> assignment.protocol.Game
+assignment.Main ..> assignment.protocol.Player
+assignment.Main ..> assignment.piece.Archer
+assignment.Main ..> assignment.piece.Knight
+assignment.Main ..> assignment.player.ConsolePlayer
+assignment.Main ..> assignment.player.RandomPlayer
+assignment.Main ..> assignment.protocol.Configuration
+assignment.piece.Archer ..> assignment.protocol.Game
+assignment.piece.Archer --|> assignment.protocol.Piece
+assignment.piece.Archer ..> assignment.protocol.Player
+assignment.piece.Archer ..> java.lang.Override
+assignment.piece.Archer ..> assignment.protocol.Move
+assignment.piece.Archer ..> assignment.protocol.Place
+assignment.piece.Archer ..> java.util.ArrayList
+assignment.piece.ArcherMoveRule ..> assignment.protocol.Game
+assignment.piece.ArcherMoveRule ..> java.lang.Override
+assignment.piece.ArcherMoveRule ..> assignment.protocol.Move
+assignment.piece.ArcherMoveRule --|> assignment.piece.Rule
+assignment.piece.FirstNMovesProtectionRule ..> assignment.protocol.Game
+assignment.piece.FirstNMovesProtectionRule ..> java.lang.Override
+assignment.piece.FirstNMovesProtectionRule ..> assignment.protocol.Move
+assignment.piece.FirstNMovesProtectionRule --|> assignment.piece.Rule
+assignment.piece.Knight ..> assignment.protocol.Game
+assignment.piece.Knight --|> assignment.protocol.Piece
+assignment.piece.Knight ..> assignment.protocol.Player
+assignment.piece.Knight ..> java.lang.Override
+assignment.piece.Knight ..> assignment.protocol.Move
+assignment.piece.Knight ..> assignment.protocol.Place
+assignment.piece.Knight ..> java.util.ArrayList
+assignment.piece.KnightBlockRule ..> assignment.protocol.Game
+assignment.piece.KnightBlockRule ..> java.lang.Override
+assignment.piece.KnightBlockRule ..> assignment.protocol.Move
+assignment.piece.KnightBlockRule ..> assignment.protocol.Place
+assignment.piece.KnightBlockRule --|> assignment.piece.Rule
+assignment.piece.KnightMoveRule ..> assignment.protocol.Game
+assignment.piece.KnightMoveRule ..> java.lang.Override
+assignment.piece.KnightMoveRule ..> assignment.protocol.Move
+assignment.piece.KnightMoveRule --|> assignment.piece.Rule
+assignment.piece.NilMoveRule ..> assignment.protocol.Game
+assignment.piece.NilMoveRule ..> java.lang.Override
+assignment.piece.NilMoveRule ..> assignment.protocol.Move
+assignment.piece.NilMoveRule --|> assignment.piece.Rule
+assignment.piece.OccupiedRule ..> assignment.protocol.Game
+assignment.piece.OccupiedRule ..> java.lang.Override
+assignment.piece.OccupiedRule ..> assignment.protocol.Move
+assignment.piece.OccupiedRule --|> assignment.piece.Rule
+assignment.piece.OutOfBoundaryRule ..> assignment.protocol.Game
+assignment.piece.OutOfBoundaryRule ..> java.lang.Override
+assignment.piece.OutOfBoundaryRule ..> assignment.protocol.Move
+assignment.piece.OutOfBoundaryRule --|> assignment.piece.Rule
+assignment.piece.VacantRule ..> assignment.protocol.Game
+assignment.piece.VacantRule ..> java.lang.Override
+assignment.piece.VacantRule ..> assignment.protocol.Move
+assignment.piece.VacantRule --|> assignment.piece.Rule
+assignment.player.ConsolePlayer ..> assignment.protocol.Game
+assignment.player.ConsolePlayer --|> assignment.protocol.Player
+assignment.player.ConsolePlayer ..> java.lang.Override
+assignment.player.ConsolePlayer ..> org.jetbrains.annotations.NotNull
+assignment.player.ConsolePlayer ..> assignment.protocol.Move
+assignment.player.ConsolePlayer ..> assignment.protocol.Place
+assignment.player.ConsolePlayer ..> java.util.Scanner
+assignment.player.ConsolePlayer ..> assignment.protocol.Color
+assignment.player.RandomPlayer ..> assignment.protocol.Game
+assignment.player.RandomPlayer --|> assignment.protocol.Player
+assignment.player.RandomPlayer ..> java.lang.Override
+assignment.player.RandomPlayer ..> org.jetbrains.annotations.NotNull
+assignment.player.RandomPlayer ..> assignment.protocol.Move
+assignment.player.RandomPlayer ..> java.util.Random
+assignment.player.RandomPlayer ..> assignment.protocol.Color
+assignment.protocol.Configuration ..> java.lang.Override
+assignment.protocol.Configuration ..> assignment.protocol.exception.InvalidConfigurationError
+assignment.protocol.Configuration --|> java.lang.Cloneable
+assignment.protocol.Move ..> java.lang.Override
+assignment.protocol.Move ..> java.util.Objects
+assignment.protocol.Move ..> java.util.StringJoiner
+assignment.protocol.Move --|> java.lang.Cloneable
+assignment.protocol.MoveRecord ..> java.lang.Override
+assignment.protocol.MoveRecord ..> org.jetbrains.annotations.NotNull
+assignment.protocol.MoveRecord ..> java.util.Objects
+assignment.protocol.MoveRecord ..> java.util.StringJoiner
+assignment.protocol.MoveRecord --|> java.lang.Cloneable
+assignment.protocol.Place ..> java.lang.Override
+assignment.protocol.Place ..> java.util.Objects
+assignment.protocol.Place ..> java.util.StringJoiner
+assignment.protocol.Place --|> java.lang.Cloneable
+assignment.protocol.exception.InvalidConfigurationError --|> java.lang.Error
+assignment.piece.Rule ..> assignment.protocol.Game
+assignment.piece.Rule ..> assignment.protocol.Move
+@enduml

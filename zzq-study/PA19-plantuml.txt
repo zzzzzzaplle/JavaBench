@@ -1,0 +1,94 @@
+@startuml
+abstract class game.map.cells.Cell
+class Main
+class game.CellStack
+class game.DelayBar
+class game.Game
+class game.PipeQueue
+class game.map.Map
+class game.map.cells.FillableCell
+class game.map.cells.TerminationCell
+class game.map.cells.Wall
+class game.pipes.Pipe
+class io.Deserializer
+class java.io.BufferedReader
+class java.io.FileNotFoundException
+class java.io.IOException
+class java.io.InputStreamReader
+class java.nio.file.Path
+class java.nio.file.Paths
+class java.util.ArrayList
+class java.util.Arrays
+class java.util.LinkedList
+class java.util.List
+class java.util.Objects
+class java.util.Optional
+class java.util.Random
+class java.util.Stack
+class java.util.stream.Collectors
+class util.Coordinate
+class util.PipePatterns
+class util.StringUtils
+enum util.Direction
+interface game.MapElement
+game.map.cells.Cell ..> util.Coordinate
+game.map.cells.Cell ..> util.Direction
+game.map.cells.Cell --|> game.MapElement
+Main ..> game.Game
+Main ..> io.Deserializer
+Main ..> java.io.BufferedReader
+Main ..> java.io.FileNotFoundException
+Main ..> java.io.IOException
+Main ..> java.io.InputStreamReader
+Main ..> java.util.Arrays
+game.CellStack ..> game.map.cells.FillableCell
+game.CellStack ..> java.util.Stack
+game.DelayBar ..> util.StringUtils
+game.Game ..> game.map.cells.Cell
+game.Game ..> game.map.Map
+game.Game ..> game.map.cells.FillableCell
+game.Game ..> game.pipes.Pipe
+game.Game ..> io.Deserializer
+game.Game ..> java.util.List
+game.Game ..> util.Coordinate
+game.PipeQueue ..> game.pipes.Pipe
+game.PipeQueue ..> java.util.LinkedList
+game.PipeQueue ..> java.util.List
+game.PipeQueue ..> java.util.Random
+game.map.Map ..> game.map.cells.Cell
+game.map.Map ..> game.map.cells.FillableCell
+game.map.Map ..> game.map.cells.TerminationCell
+game.map.Map ..> game.map.cells.Wall
+game.map.Map ..> game.pipes.Pipe
+game.map.Map ..> io.Deserializer
+game.map.Map ..> util.Coordinate
+game.map.Map ..> util.StringUtils
+game.map.Map ..> util.Direction
+game.map.cells.FillableCell --|> game.map.cells.Cell
+game.map.cells.FillableCell ..> game.pipes.Pipe
+game.map.cells.FillableCell ..> java.util.Optional
+game.map.cells.FillableCell ..> util.Coordinate
+game.map.cells.FillableCell --|> game.MapElement
+game.map.cells.TerminationCell --|> game.map.cells.Cell
+game.map.cells.TerminationCell ..> util.Coordinate
+game.map.cells.TerminationCell ..> util.PipePatterns
+game.map.cells.TerminationCell ..> util.Direction
+game.map.cells.Wall --|> game.map.cells.Cell
+game.map.cells.Wall ..> util.Coordinate
+game.map.cells.Wall ..> util.PipePatterns
+game.pipes.Pipe ..> util.PipePatterns
+game.pipes.Pipe ..> util.Direction
+game.pipes.Pipe --|> game.MapElement
+io.Deserializer ..> game.map.cells.Cell
+io.Deserializer ..> game.Game
+io.Deserializer ..> game.map.cells.TerminationCell
+io.Deserializer ..> game.pipes.Pipe
+io.Deserializer ..> java.nio.file.Path
+io.Deserializer ..> java.nio.file.Paths
+io.Deserializer ..> java.util.ArrayList
+io.Deserializer ..> java.util.Arrays
+io.Deserializer ..> java.util.List
+io.Deserializer ..> java.util.stream.Collectors
+io.Deserializer ..> util.Coordinate
+util.Coordinate ..> java.util.Objects
+@enduml
