@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pa19">
+  <eClassifiers xsi:type="ecore:EClass" name="Game"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Cell" abstract="true">
+    <eOperations name="toSingleChar" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EChar"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="coord"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FillableCell" eSuperTypes="#//Cell">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pipe" eType="#//Pipe"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Wall" eSuperTypes="#//Cell"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TerminationCell" eSuperTypes="#//Cell">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pointingTo" eType="#//Direction"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//TerminationType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pipe">
+    <eOperations name="getConnections" upperBound="-1" eType="#//Direction"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shape" eType="#//PipeShape"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PipeQueue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DelayBar"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CellStack"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Deserializer"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="Direction">
+    <eLiterals name="UP"/>
+    <eLiterals name="DOWN" value="1"/>
+    <eLiterals name="LEFT" value="2"/>
+    <eLiterals name="RIGHT" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Coordinate">
+    <eOperations name="add" eType="#//Coordinate">
+      <eParameters name="other" eType="#//Coordinate"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="row" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="col" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Map">
+    <eOperations name="tryPlacePipe" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="coord" eType="#//Coordinate"/>
+      <eParameters name="pipe" eType="#//Pipe"/>
+    </eOperations>
+    <eOperations name="undo">
+      <eParameters name="coord" eType="#//Coordinate"/>
+    </eOperations>
+    <eOperations name="fillBeginTile"/>
+    <eOperations name="fillTiles">
+      <eParameters name="distance" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="checkPath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="hasLost" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="display"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="row" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="col" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prevFilledTiles" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prevFilledDistance" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="grid" eType="#//CellGrid"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceCell" eType="#//TerminationCell"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sinkCell" eType="#//TerminationCell"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filledTiles" upperBound="-1"
+        eType="#//Coordinate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PipeShape">
+    <eLiterals name="HORIZONTAL"/>
+    <eLiterals name="VERTICAL" value="1"/>
+    <eLiterals name="TOP_LEFT" value="2"/>
+    <eLiterals name="TOP_RIGHT" value="3"/>
+    <eLiterals name="BOTTOM_LEFT" value="4"/>
+    <eLiterals name="BOTTOM_RIGHT" value="5"/>
+    <eLiterals name="CROSS" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TerminationType">
+    <eLiterals name="SOURCE"/>
+    <eLiterals name="SINK" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CellGrid">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="row" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="col" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cells" upperBound="-1"
+        eType="#//Cell" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -3,6 +3,7 @@ package util;
 import org.jetbrains.annotations.NotNull;
 
 /**
+ * getOpposite() 的真正用途：检查管道连接
  * Represents a direction in reference to a {@link game.map.cells.Cell}.
  */
 public enum Direction {
