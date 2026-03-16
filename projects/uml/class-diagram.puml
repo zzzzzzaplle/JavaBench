@@ -1,0 +1,266 @@
+@startuml
+class game.map.cells.FillableCell {
+- Pipe pipe
++ FillableCell FillableCell(Coordinate)
++ FillableCell FillableCell(Coordinate,Pipe)
++ Optional<Pipe> getPipe()
++ char toSingleChar()
+}
+
+class io.Deserializer {
+- Path path
++ Deserializer Deserializer(String)
+- Deserializer Deserializer(Path)
++ Game parseGame()
++ {static} Cell[][] parseString(int,int,String)
+- String getFirstNonEmptyLine(BufferedReader)
+}
+
+enum util.Direction {
++ {static} UP
++ {static} DOWN
++ {static} LEFT
++ {static} RIGHT
++ Direction getOpposite()
++ Coordinate getOffset()
+}
+
+abstract class game.map.cells.Cell {
++ Coordinate coord
++ {static} Cell fromChar(char,Coordinate,TerminationCell.Type)
+}
+
+class game.map.Map {
+- int rows
+- int cols
+- TerminationCell sourceCell
+- TerminationCell sinkCell
+- Set<Coordinate> filledTiles
+- int prevFilledTiles
+- Integer prevFilledDistance
++ Map Map(int,int)
++ Map Map(int,int,Cell[][])
++ boolean tryPlacePipe(Coordinate,Pipe)
+- TerminationCell.CreateInfo generateStartCellInfo()
+- TerminationCell.CreateInfo generateEndCellInfo()
++ void display()
++ void undo(Coordinate)
++ void fillBeginTile()
+- List<Coordinate> getTraversedCoords()
++ void fillTiles(int)
++ boolean checkPath()
++ boolean hasLost()
+}
+
+interface game.MapElement {
+}
+
+class Main {
+- {static} String[] QUIT_RESPONSES
+- {static} String[] UNDO_RESPONSES
++ {static} void main(String[])
+}
+
+class game.PipeQueue {
+- {static} int MAX_GEN_LENGTH
+- LinkedList<Pipe> pipeQueue
+- {static} Pipe generateNewPipe()
+}
+
+class util.Coordinate {
++ int row
++ int col
++ Coordinate Coordinate(int,int)
++ boolean equals(Object)
++ boolean equals(Coordinate)
++ int hashCode()
++ Coordinate add(Coordinate)
+}
+
+class util.PipePatterns {
++ {static} char WALL
+- PipePatterns PipePatterns()
+}
+
+class util.PipePatterns.Filled {
++ {static} char UP_ARROW
++ {static} char DOWN_ARROW
++ {static} char LEFT_ARROW
++ {static} char RIGHT_ARROW
++ {static} char HORIZONTAL
++ {static} char VERTICAL
++ {static} char TOP_LEFT
++ {static} char TOP_RIGHT
++ {static} char BOTTOM_LEFT
++ {static} char BOTTOM_RIGHT
++ {static} char CROSS
+}
+
+class util.PipePatterns.Unfilled {
++ {static} char UP_ARROW
++ {static} char DOWN_ARROW
++ {static} char LEFT_ARROW
++ {static} char RIGHT_ARROW
++ {static} char HORIZONTAL
++ {static} char VERTICAL
++ {static} char TOP_LEFT
++ {static} char TOP_RIGHT
++ {static} char BOTTOM_LEFT
++ {static} char BOTTOM_RIGHT
++ {static} char CROSS
+}
+
+class game.map.cells.TerminationCell {
+- boolean isFilled
++ Direction pointingTo
++ Type type
++ TerminationCell TerminationCell(Coordinate,Direction,Type)
++ void setFilled()
++ char toSingleChar()
+}
+
+enum game.map.cells.TerminationCell.Type {
++ {static} SOURCE
++ {static} SINK
+}
+
+class game.map.cells.TerminationCell.CreateInfo {
++ Coordinate coord
++ Direction dir
++ TerminationCell.CreateInfo CreateInfo(Coordinate,Direction)
+}
+
+class game.pipes.Pipe {
+- Shape shape
+- boolean filled
++ Pipe Pipe(Shape)
++ void setFilled()
++ boolean getFilled()
++ Direction[] getConnections()
++ char toSingleChar()
++ {static} Pipe fromString(String)
+}
+
+enum game.pipes.Pipe.Shape {
++ {static} HORIZONTAL
++ {static} VERTICAL
++ {static} TOP_LEFT
++ {static} TOP_RIGHT
++ {static} BOTTOM_LEFT
++ {static} BOTTOM_RIGHT
++ {static} CROSS
+}
+
+class game.CellStack {
+- Stack<FillableCell> cellStack
+- int count
+}
+
+class game.Game {
+- Map map
+- PipeQueue pipeQueue
+- DelayBar delayBar
+- CellStack cellStack
+- int numOfSteps
++ Game Game(int,int)
++ Game Game(int,int,int,Cell[][],List<Pipe>)
++ boolean placePipe(int,char)
++ void skipPipe()
++ boolean undoStep()
++ void display()
++ void updateState()
++ boolean hasWon()
++ boolean hasLost()
++ int getNumOfSteps()
+}
+
+class game.map.cells.Wall {
++ Wall Wall(Coordinate)
++ char toSingleChar()
+}
+
+class game.DelayBar {
+- int initialValue
+- int currentValue
+}
+
+class util.StringUtils {
+- StringUtils StringUtils()
++ {static} String createPadding(int,char)
+}
+
+game.MapElement <|.. game.map.cells.FillableCell
+game.map.cells.Cell <|-- game.map.cells.FillableCell
+game.pipes.Pipe -- game.map.cells.FillableCell
+game.Game .. io.Deserializer
+util.Direction .. util.Direction
+util.Coordinate .. util.Direction
+game.MapElement <|.. game.map.cells.Cell
+util.Coordinate -- game.map.cells.Cell
+game.map.cells.Cell .. game.map.cells.Cell
+game.map.cells.TerminationCell.Type .. game.map.cells.Cell
+game.map.cells.TerminationCell -- game.map.Map
+util.Coordinate -- game.map.Map
+game.pipes.Pipe .. game.map.Map
+game.pipes.Pipe -- game.PipeQueue
+util.Coordinate .. util.Coordinate
+util.PipePatterns.Filled +.. util.PipePatterns
+util.PipePatterns.Unfilled +.. util.PipePatterns
+game.map.cells.Cell <|-- game.map.cells.TerminationCell
+util.Direction -- game.map.cells.TerminationCell
+game.map.cells.TerminationCell.Type +.. game.map.cells.TerminationCell
+game.map.cells.TerminationCell.CreateInfo +.. game.map.cells.TerminationCell
+util.Coordinate -- game.map.cells.TerminationCell.CreateInfo
+util.Direction -- game.map.cells.TerminationCell.CreateInfo
+game.MapElement <|.. game.pipes.Pipe
+game.pipes.Pipe .. game.pipes.Pipe
+game.pipes.Pipe.Shape +.. game.pipes.Pipe
+game.map.cells.FillableCell -- game.CellStack
+game.map.Map -- game.Game
+game.PipeQueue -- game.Game
+game.DelayBar -- game.Game
+game.CellStack -- game.Game
+game.map.cells.Cell <|-- game.map.cells.Wall
+@enduml
+
+' ==========================================================
+' 类关系列表
+' ==========================================================
+'
+' 【继承关系】
+'   Cell --继承--> FillableCell
+'   Cell --继承--> TerminationCell
+'   Cell --继承--> Wall
+'
+' 【实现关系】
+'   MapElement --实现--> FillableCell
+'   MapElement --实现--> Cell
+'   MapElement --实现--> Pipe
+'
+' 【关联关系】
+'   CellStack --关联--> Game
+'   Coordinate --关联--> Cell
+'   Coordinate --关联--> Map
+'   Coordinate --关联--> CreateInfo
+'   DelayBar --关联--> Game
+'   Direction --关联--> TerminationCell
+'   Direction --关联--> CreateInfo
+'   FillableCell --关联--> CellStack
+'   Map --关联--> Game
+'   Pipe --关联--> FillableCell
+'   Pipe --关联--> PipeQueue
+'   PipeQueue --关联--> Game
+'   TerminationCell --关联--> Map
+'
+' 【依赖关系】
+'   Coordinate --依赖--> Direction
+'   CreateInfo + --依赖--> TerminationCell
+'   Filled + --依赖--> PipePatterns
+'   Game --依赖--> Deserializer
+'   Pipe --依赖--> Map
+'   Shape + --依赖--> Pipe
+'   Type --依赖--> Cell
+'   Type + --依赖--> TerminationCell
+'   Unfilled + --依赖--> PipePatterns
+'
+' 共计 28 个关系
