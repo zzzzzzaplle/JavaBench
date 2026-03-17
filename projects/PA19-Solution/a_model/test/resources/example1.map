@@ -1,0 +1,22 @@
+# rows
+8
+
+# cols
+8
+
+# delay before first flow
+10
+
+# map
+WWWWWWWW
+W......W
+<......W
+W......W
+W^.....W
+W......W
+W......W
+WWWWWWWW
+
+# optional: list of pipes to start with
+# TR: Top-Right, TL: Top-Left, BL: Bottom-Left, BR: Bottom-Right, CR: Cross
+TR,TL, BR, CR

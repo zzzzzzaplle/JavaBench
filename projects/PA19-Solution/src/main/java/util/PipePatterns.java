@@ -1,5 +1,8 @@
 package util;
-
+/*
+作用：
+存放所有管道相关的字符常量（如墙、箭头、直线、拐角等）。
+*/
 /**
  * A collection of all characters for pipe patterns.
  */

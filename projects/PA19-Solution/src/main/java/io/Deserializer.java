@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
+/**输入是一个地图文件，输出是一个Game对象。
  * A deserializer for converting a map file into a {@link game.Game}.
  */
 public class Deserializer {

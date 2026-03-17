@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pa19">
-  <eClassifiers xsi:type="ecore:EClass" name="Game"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Game">
+    <eOperations name="placePipe" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="row" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="col" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EChar"/>
+    </eOperations>
+    <eOperations name="skipPipe"/>
+    <eOperations name="undoStep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="updateState"/>
+    <eOperations name="haswon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="hasLost" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numOfSteps" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="map" eType="#//GameMap"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pipeQueue" eType="#//GameMap"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="delayBar" eType="#//DelayBar"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cellStack" eType="#//CellStack"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Cell" abstract="true">
     <eOperations name="toSingleChar" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EChar"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="coord"/>
@@ -20,10 +39,42 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="filled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="shape" eType="#//PipeShape"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PipeQueue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DelayBar"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CellStack"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Deserializer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PipeQueue">
+    <eOperations name="peek" eType="#//Pipe"/>
+    <eOperations name="consume"/>
+    <eOperations name="undo">
+      <eParameters name="pipe" eType="#//Pipe"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxGenLength" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="5" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="queue" upperBound="-1"
+        eType="#//Pipe" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DelayBar">
+    <eOperations name="countdown"/>
+    <eOperations name="distance" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="currentValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CellStack">
+    <eOperations name="push">
+      <eParameters name="cell" eType="#//FillableCell"/>
+    </eOperations>
+    <eOperations name="pop" eType="#//FillableCell"/>
+    <eOperations name="getUndoCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stack" upperBound="-1"
+        eType="#//FillableCell" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Deserializer">
+    <eOperations name="parseGame" eType="#//Game"/>
+    <eOperations name="parseString" eType="#//CellGrid">
+      <eParameters name="rows" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="cols" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="cellsRep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Direction">
     <eLiterals name="UP"/>
     <eLiterals name="DOWN" value="1"/>
@@ -39,7 +90,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="col" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         changeable="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Map">
+  <eClassifiers xsi:type="ecore:EClass" name="GameMap">
     <eOperations name="tryPlacePipe" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="coord" eType="#//Coordinate"/>
       <eParameters name="pipe" eType="#//Pipe"/>
